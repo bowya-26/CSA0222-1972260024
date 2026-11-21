@@ -1,21 +1,40 @@
 #include <stdio.h>
-#include <limits.h>
-
-typedef unsigned short meter_t;
-
-unsigned int consumption(meter_t previous, meter_t current)
-{
-    return (unsigned short)(current - previous);
-}
 
 int main()
 {
-    printf("sizeof(meter_t) = %zu bytes, maximum reading = %u\n",
-           sizeof(meter_t), (unsigned)USHRT_MAX);
+    int house_no;
+    int previous_reading, current_reading, units;
+    int energy_charge, fixed_charge, total_bill;
 
-    printf("Consumption: %u units\n", consumption(1200, 1530));
+    fixed_charge = 50;
 
-    printf("Consumption: %u units\n", consumption(65400, 120));
+    printf("Enter House Number: ");
+    scanf("%d", &house_no);
+
+    printf("Enter Previous Reading: ");
+    scanf("%d", &previous_reading);
+
+    printf("Enter Current Reading: ");
+    scanf("%d", &current_reading);
+
+    units = current_reading - previous_reading;
+
+    if (units <= 100)
+        energy_charge = 0;
+
+    else if (units <= 200)
+        energy_charge = (units - 100) * 2.25;
+
+    else
+        energy_charge = (100 * 2.25) + (units - 200) * 4.50;
+
+    total_bill = fixed_charge + energy_charge;
+
+    printf("\nHouse Number: %d\n", house_no);
+    printf("Units Consumed: %d\n", units);
+    printf("Energy Charge: Rs %d\n", energy_charge);
+    printf("Fixed Charge: Rs %d\n", fixed_charge);
+    printf("Total Bill: Rs %d\n", total_bill);
 
     return 0;
 }
