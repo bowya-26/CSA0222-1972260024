@@ -1,1 +1,18 @@
+#include <stdio.h>
 
+#define FIXED_CHARGE 50
+
+int main()
+{
+    int units = 150;
+    int bill = FIXED_CHARGE + (units - 100) * 2;
+
+#ifdef DEBUG
+    printf("Units = %d\n", units);
+    printf("Fixed charge = %d\n", FIXED_CHARGE);
+#endif
+
+    printf("Total Bill = Rs %d\n", bill);
+
+    return 0;
+}
